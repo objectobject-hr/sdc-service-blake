@@ -6,7 +6,9 @@
   "scripts": {
     "build": "webpack -w",
     "test": "test",
-    "start": "nodemon server/index.js"
+    "dev": "concurrently \"webpack -w\" \"nodemon server\"",
+    "start": "node server",
+    "seed": "cd db && node seed.js"
   },
   "repository": {
     "type": "git",
