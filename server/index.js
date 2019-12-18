@@ -14,8 +14,8 @@ app.use('/', express.static(path.join(__dirname, '../client/dist')))
 
 app.listen(port, () => console.log(`Connected to port ${port}`))
 
-app.get('/amenities/:id', ({ params }, res) => {
-  Detail.find({ ...params }, (err, data) => {
+app.get('/details', ({ query }, res) => {
+  Detail.find(query, (err, data) => {
     if (err) console.error(err)
     else res.send(data)
   })

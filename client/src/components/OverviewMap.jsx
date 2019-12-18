@@ -14,7 +14,6 @@ const OverviewMap = props => {
   // }
   return (
     <div>
-      heyo
       {/* <img src={`https://maps.googleapis.com/maps/api/staticmap?size=445x160&markers=color:0x0067db|size:small|${addressObj.latitude},${addressObj.longitude}&center=${addressObj.latitude},${addressObj.longitude}&region=US&language=en&zoom=15&key=${foo.map}&format=png`}/> */}
     </div>
   )
