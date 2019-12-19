@@ -12,8 +12,6 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/', express.static(path.join(__dirname, '../client/dist')))
 
-app.listen(port, () => console.log(`Connected to port ${port}`))
-
 app.get('/details', ({ query }, res) => {
   Detail.find(query, (err, data) => {
     if (err) console.error(err)
@@ -21,6 +19,25 @@ app.get('/details', ({ query }, res) => {
   })
 })
 
-// app.post('/amenities', (req, res) => {
-//   Detail.create({})
-// })
+app.post('/amenities', ({ body }, res) => {
+  Detail.create(body, (err, data) => {
+    if (err) console.error(err)
+    else res.send(data)
+  })
+})
+
+app.put('/amenities', ({ body }, res) => {
+  Detail.updateOne(body, (err, data) => {
+    if (err) console.error(err)
+    else res.send(data)
+  })
+})
+
+app.delete('/amenities', ({ body }, res) => {
+  Detail.deleteOne(body, (err, data) => {
+    if (err) console.error(err)
+    else res.send(data)
+  })
+})
+
+app.listen(port, () => console.log(`Connected to port ${port}`))
