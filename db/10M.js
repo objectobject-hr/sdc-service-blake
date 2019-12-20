@@ -1,12 +1,11 @@
-require('../db')
-const mongoose = require('mongoose')
-const { Detail } = require('./models')
+const cliProgress = require('cli-progress')
 const {
   propertyHelper,
   amenitiesHelper,
   houseRulesHelper,
   tagHelper
 } = require('./helpers')
+const fs = require('fs')
 
 // min and max inclusive
 const randomNumber = (min, max) => {
@@ -65,7 +64,7 @@ const createHouseRules = () => {
 }
 
 // create one listing's amenities/overview, etc.
-const createListingDetails = listingID => {
+const createDetails = listingID => {
   // for each of the props in the listing doc
   var listing = {}
   var tagCopy = tagHelper.slice(0)
@@ -103,30 +102,36 @@ const createListingDetails = listingID => {
   return listing
 }
 
-const createListings = () => {
-  var allListings = []
-  var listingID = 1
-  // for 100 times, invoke createListingDetails and push into result arr
-  for (var i = 0; i < 1; i++) {
-    allListings.push(createListingDetails(listingID))
-    listingID++
-  }
-  return allListings
-}
+const count = 10000000
+const file = 'db/10M.json'
+if (fs.existsSync(file)) fs.unlinkSync(file)
+const bar = new cliProgress.SingleBar()
+bar.start(count, 0)
+const stream = fs.createWriteStream(file)
+stream.on('err', err => console.error(err))
+stream.on('close', () => {
+  bar.stop()
+  console.log('finished writing')
+})
+bigWrite()
 
-const insertListings = () => {
-  var listings = createListings()
-  Detail.deleteMany({}, () => {
-    console.log('deleted details')
-    Detail.insertMany(listings, (err, docs) => {
-      if (err) {
-        console.log("Can't insert listings", err)
+function bigWrite() {
+  let i = count
+  write()
+  function write() {
+    let ok = true
+    do {
+      i--
+      if (i === 0) {
+        stream.write(JSON.stringify(createDetails(i + 1)))
+        stream.end()
       } else {
-        console.log('seeded details')
+        ok = stream.write(JSON.stringify(createDetails(i + 1)) + '\n')
+        bar.update(count - i + 1)
       }
-      mongoose.connection.close()
-    })
-  })
+    } while (i > 0 && ok)
+    if (i > 0) {
+      stream.once('drain', write)
+    }
+  }
 }
-
-insertListings()
