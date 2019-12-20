@@ -1,3 +1,4 @@
 node_modules
 foo.config
 client/dist
+db/10M.json

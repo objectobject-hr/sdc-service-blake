@@ -8,3 +8,5 @@ mongoose.connect('mongodb://localhost/amenities-overview', {
 const connection = mongoose.connection
 
 connection.once('open', () => console.log('MongoDB connected successfully'))
+
+module.exports = connection
