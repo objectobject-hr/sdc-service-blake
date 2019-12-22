@@ -1,3 +1,4 @@
+require('dotenv').config()
 require('../db')
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -6,7 +7,7 @@ const { Detail } = require('../db/models')
 
 const app = express()
 
-const port = 3001
+const PORT = process.env.PORT || 3001
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -40,4 +41,4 @@ app.delete('/amenities', ({ body }, res) => {
   })
 })
 
-app.listen(port, () => console.log(`Connected to port ${port}`))
+app.listen(PORT, () => console.log(`Connected to port ${PORT}`))
