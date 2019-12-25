@@ -2,7 +2,8 @@ const mongoose = require('mongoose')
 
 mongoose.connect('mongodb://localhost/amenities-overview', {
   useUnifiedTopology: true,
-  useNewUrlParser: true
+  useNewUrlParser: true,
+  useCreateIndex: true
 })
 
 const connection = mongoose.connection

@@ -1,11 +1,18 @@
 const cliProgress = require('cli-progress')
 const fs = require('fs')
 const createDetails = require('./createDetails')
+const colors = require('colors')
 
 const count = 10000000
 const file = 'db/10M.json'
 if (fs.existsSync(file)) fs.unlinkSync(file)
-const bar = new cliProgress.SingleBar()
+const bar = new cliProgress.SingleBar({
+  format: `progress |${colors.cyan(
+    '{bar}'
+  )}| {percentage}% | {total} / {value} | {duration}s  `,
+  barCompleteChar: `\u2588`,
+  barIncompleteChar: '.'
+})
 bar.start(count, 0)
 const stream = fs.createWriteStream(file)
 stream.on('err', err => console.error(err))
