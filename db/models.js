@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
+const moment = require('moment')
 
-const DetailSchema = mongoose.Schema({
-  listing_ID: Number,
+const schema = mongoose.Schema({
+  listing_ID: { type: Number, index: true },
   propertyType: String,
   overview: {
     Sleeps: {
@@ -43,6 +44,14 @@ const DetailSchema = mongoose.Schema({
   tags: [String]
 })
 
-const Detail = mongoose.model('Detail', DetailSchema)
+schema.pre('findOne', () => {
+  this.start = moment()
+})
+schema.post('findOne', () => {
+  this.end = moment()
+  console.log(this.end.diff(this.start, 'seconds'))
+})
+
+const Detail = mongoose.model('Detail', schema)
 
 module.exports = { Detail }

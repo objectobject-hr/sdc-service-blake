@@ -1,43 +1,51 @@
+require('dotenv').config()
 require('../db')
+
+const path = require('path')
+
 const express = require('express')
 const bodyParser = require('body-parser')
-const path = require('path')
+const mongoose = require('mongoose')
+
 const { Detail } = require('../db/models')
 
 const app = express()
 
-const port = 3001
+const PORT = process.env.PORT || 3001
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/', express.static(path.join(__dirname, '../client/dist')))
 
 app.get('/details', ({ query }, res) => {
-  Detail.find(query, (err, data) => {
+  Detail.findOne(query).exec((err, data) => {
     if (err) console.error(err)
     else res.send(data)
   })
 })
 
-app.post('/amenities', ({ body }, res) => {
+app.post('/details', ({ body }, res) => {
   Detail.create(body, (err, data) => {
     if (err) console.error(err)
     else res.send(data)
   })
 })
 
-app.put('/amenities', ({ body }, res) => {
+app.put('/details', ({ body }, res) => {
   Detail.updateOne(body, (err, data) => {
     if (err) console.error(err)
     else res.send(data)
   })
 })
 
-app.delete('/amenities', ({ body }, res) => {
+app.delete('/details', ({ body }, res) => {
   Detail.deleteOne(body, (err, data) => {
     if (err) console.error(err)
     else res.send(data)
   })
 })
 
-app.listen(port, () => console.log(`Connected to port ${port}`))
+app.listen(PORT, () => {
+  mongoose.set('debug', true)
+  console.log(`Connected to port ${PORT}`)
+})
