@@ -54,4 +54,4 @@ schema.post('findOne', () => {
 
 const Detail = mongoose.model('Detail', schema)
 
-module.exports = { Detail }
+module.exports = Detail

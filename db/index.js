@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://localhost/amenities-overview', {
+mongoose.connect('mongodb://localhost/sdc', {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useCreateIndex: true
@@ -8,6 +8,6 @@ mongoose.connect('mongodb://localhost/amenities-overview', {
 
 const connection = mongoose.connection
 
-connection.once('open', () => console.log('MongoDB connected successfully'))
+connection.once('open', () => console.log('MongoDB connected successfully\n'))
 
 module.exports = connection
