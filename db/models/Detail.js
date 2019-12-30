@@ -44,13 +44,19 @@ const schema = mongoose.Schema({
   tags: [String]
 })
 
-schema.pre('findOne', () => {
-  this.start = moment()
-})
-schema.post('findOne', () => {
-  this.end = moment()
-  console.log(this.end.diff(this.start, 'seconds'))
-})
+const methods = ['findOne', 'create', 'updateOne', 'deleteOne']
+
+for (const method of methods) {
+  schema.pre(method, () => {
+    this.start = moment()
+  })
+  schema.post(method, () => {
+    this.end = moment()
+    console.log(
+      method + ': ' + this.end.diff(this.start, 'milliseconds') + 'ms'
+    )
+  })
+}
 
 const Detail = mongoose.model('Detail', schema)
 
