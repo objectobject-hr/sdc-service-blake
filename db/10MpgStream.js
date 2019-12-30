@@ -44,23 +44,3 @@ pool.connect(function(err, client, done) {
     fileStream.pipe(stream)
   })
 })
-
-// const { Pool } = require('pg')
-
-// var pool = new Pool()
-
-// pool.connect(function(err, client, done) {
-//   pool.query('delete from details', (err, res) => {
-//     pool.query("COPY details from '10M.csv'", (err, res) => {
-//       if (err) {
-//         console.error(err)
-//         pool.end()
-//         done()
-//         return
-//       }
-//       console.log('finished')
-//       pool.end()
-//       done()
-//     })
-//   })
-// })
