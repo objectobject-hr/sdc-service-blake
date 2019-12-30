@@ -2,9 +2,10 @@ const cliProgress = require('cli-progress')
 const fs = require('fs')
 const createDetails = require('./helpers/createDetails')
 const colors = require('colors')
-const count = require('./helpers/count')
+// const count = require('./helpers/count')
+const count = 10
 
-const file = 'db/10M.json'
+const file = 'db/10M2.json'
 if (fs.existsSync(file)) fs.unlinkSync(file)
 
 const bar = new cliProgress.SingleBar({

@@ -1,5 +1,6 @@
 const express = require('express')
 const { Detail, Counter } = require('../../db/models')
+const _ = require('lodash')
 
 const router = express.Router()
 
@@ -21,15 +22,20 @@ router.post('/', async ({ body }, res) => {
     res.sendStatus(200)
   } catch (err) {
     console.error(err)
-    res.sendStatus(500)
+    res.status(500).send(err)
   }
 })
 
-router.put('/', ({ body }, res) => {
-  Detail.updateOne(body, (err, data) => {
-    if (err) console.error(err)
-    else res.send(data)
-  })
+router.put('/', async ({ body }, res) => {
+  try {
+    const doc = await Detail.findOne({ listing_ID: body.listing_ID })
+    _.assign(doc, body)
+    await doc.save()
+    res.sendStatus(200)
+  } catch (err) {
+    console.error(err)
+    res.status(500).send(err)
+  }
 })
 
 router.delete('/', ({ body }, res) => {

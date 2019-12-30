@@ -4,3 +4,4 @@ client/dist
 db/10M.json
 db/10M.csv
 .env
+.DS_Store

@@ -44,7 +44,7 @@ const schema = mongoose.Schema({
   tags: [String]
 })
 
-const methods = ['findOne', 'create', 'updateOne', 'deleteOne']
+const methods = ['findOne', 'create', 'updateOne', 'deleteOne', 'save']
 
 for (const method of methods) {
   schema.pre(method, () => {
@@ -53,7 +53,7 @@ for (const method of methods) {
   schema.post(method, () => {
     this.end = moment()
     console.log(
-      method + ': ' + this.end.diff(this.start, 'milliseconds') + 'ms'
+      method + ': ' + this.end.diff(this.start, 'milliseconds') + 'ms\n'
     )
   })
 }
