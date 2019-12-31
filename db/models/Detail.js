@@ -44,20 +44,6 @@ const schema = mongoose.Schema({
   tags: [String]
 })
 
-const methods = ['findOne', 'create', 'updateOne', 'deleteOne', 'save']
-
-for (const method of methods) {
-  schema.pre(method, () => {
-    this.start = moment()
-  })
-  schema.post(method, () => {
-    this.end = moment()
-    console.log(
-      method + ': ' + this.end.diff(this.start, 'milliseconds') + 'ms\n'
-    )
-  })
-}
-
 const Detail = mongoose.model('Detail', schema)
 
 module.exports = Detail

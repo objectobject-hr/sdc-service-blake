@@ -16,9 +16,7 @@ router.post('/', async ({ body }, res) => {
     const counter = await Counter.findOne({ id: 'details' })
     counter.count++
     await Detail.create({ ...body, listing_ID: counter.count })
-    console.log(`detail ${counter.count} created`)
     await counter.save()
-    console.log(`counter updated to ${counter.count}\n`)
     res.sendStatus(200)
   } catch (err) {
     console.error(err)
