@@ -3,6 +3,7 @@ const fs = require('fs')
 const createDetails = require('./helpers/createDetails')
 const colors = require('colors')
 const count = require('./helpers/count')
+const path = require('path')
 
 const file = 'db/10M.json'
 if (fs.existsSync(file)) fs.unlinkSync(file)

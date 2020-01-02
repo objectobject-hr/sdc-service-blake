@@ -1,5 +1,4 @@
-require('./index')
-const mongoose = require('mongoose')
+const db = require('./index')
 const os = require('os')
 const { execSync } = require('child_process')
 const models = require('./models')
@@ -21,7 +20,7 @@ models.Detail.deleteMany({}, err => {
         console.log('deleted details counter')
         models.Counter.create({ id: 'details', count: count }, err => {
           if (err) console.error(err)
-          mongoose.connection.close()
+          db.close()
         })
       }
     })
