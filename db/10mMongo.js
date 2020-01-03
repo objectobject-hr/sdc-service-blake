@@ -46,7 +46,7 @@ function loadRecords() {
             )
             loaded++
             console.log('\nLoaded ' + loaded)
-            if (loaded < 2) loadRecords()
+            if (loaded < 10) loadRecords()
             else {
               const db = require('./index')
               db.on('open', () => {
