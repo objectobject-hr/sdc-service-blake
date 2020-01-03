@@ -6,10 +6,11 @@ const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
 const routes = require('./routes')
+const http = require('http')
 
 const app = express()
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -19,5 +20,7 @@ for (const key in routes) {
   const route = key.substring(0, key.indexOf('.'))
   app.use('/' + route, routes[key])
 }
+
+http.get(process.env.PROXY + '/update')
 
 app.listen(PORT, () => console.log(`Connected to port ${PORT}\n`))

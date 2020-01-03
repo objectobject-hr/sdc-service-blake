@@ -1,8 +1,8 @@
-const db = require('./index')
+const db = require('../index')
 const os = require('os')
 const { execSync } = require('child_process')
-const models = require('./models')
-const count = require('./helpers/count')
+const models = require('../models')
+const count = require('../helpers/count')
 
 const cpuCount = os.cpus().length
 
