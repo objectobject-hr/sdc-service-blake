@@ -1,16 +1,16 @@
 const cliProgress = require('cli-progress')
 const fs = require('fs')
-const createDetails = require('./helpers/createDetails')
+const createDetails = require('../helpers/createDetails')
 const colors = require('colors')
 const { execSync } = require('child_process')
 const os = require('os')
-const { Counter } = require('./models')
+const { Counter } = require('../models')
 
 let loaded = 0
 loadRecords()
 
 function loadRecords() {
-  const file = 'db/1M.json'
+  const file = 'db/10M/1M.json'
   if (fs.existsSync(file)) fs.unlinkSync(file)
   const bar = new cliProgress.SingleBar({
     format: `progress |${colors.cyan(
@@ -48,7 +48,7 @@ function loadRecords() {
             console.log('\nLoaded ' + loaded)
             if (loaded < 10) loadRecords()
             else {
-              const db = require('./index')
+              const db = require('../index')
               db.on('open', () => {
                 Counter.deleteMany({ id: 'details' }, err => {
                   if (err) console.error(err)

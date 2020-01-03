@@ -1,10 +1,10 @@
 const fs = require('fs')
-const createDetails = require('./helpers/createDetails')
+const createDetails = require('../helpers/createDetails')
 const cliProgress = require('cli-progress')
 const colors = require('colors')
 
 const count = 10
-const file = 'db/10M.csv'
+const file = 'db/10M/10M.csv'
 if (fs.existsSync(file)) fs.unlinkSync(file)
 const bar = new cliProgress.SingleBar({
   format: `progress |${colors.cyan(
