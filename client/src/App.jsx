@@ -15,7 +15,7 @@ class App extends React.Component {
   }
 
   randomListingId() {
-    return Math.floor(Math.random() * 10000000) + 1
+    return Math.floor(Math.random() * 1000) + 1
   }
 
   componentDidMount() {
