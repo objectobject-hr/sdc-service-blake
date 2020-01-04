@@ -1,5 +1,5 @@
 require('dotenv').config()
-require('../db')
+// require('../db')
 
 const path = require('path')
 
