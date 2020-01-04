@@ -21,6 +21,6 @@ for (const key in routes) {
   app.use('/' + route, routes[key])
 }
 
-http.get(process.env.PROXY + '/update')
+// http.get(process.env.PROXY + '/update')
 
 app.listen(PORT, () => console.log(`Connected to port ${PORT}\n`))
