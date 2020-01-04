@@ -21,7 +21,7 @@ for (const key in routes) {
   app.use('/' + route, routes[key])
 }
 
-app.get('/test', () => res.send('heyooo'))
+app.get('/test', (req, res) => res.send('heyooo'))
 
 // http.get(process.env.PROXY + '/update')
 
