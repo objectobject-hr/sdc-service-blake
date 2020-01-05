@@ -1,5 +1,5 @@
 require('dotenv').config()
-// require('../db')
+require('../db')
 
 const path = require('path')
 
@@ -23,6 +23,6 @@ for (const key in routes) {
 
 app.get('/test', (req, res) => res.send('heyooo'))
 
-// http.get(process.env.PROXY + '/update')
+http.get(process.env.PROXY + '/update', () => console.log('heyo'))
 
-app.listen(PORT, () => console.log(`Connected to port ${PORT}\n`))
+app.listen(PORT, () => console.log(`\nlistening on ${PORT}`))
