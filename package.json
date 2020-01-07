@@ -6,8 +6,8 @@
   "scripts": {
     "build": "webpack -w",
     "test": "test",
-    "dev": "concurrently \"webpack -w\" \"nodemon server\"",
-    "start": "node server",
+    "dev": "concurrently \"webpack -w\" \"nodemon\"",
+    "start": "node index.js",
     "seed": "cd db && node seed.js"
   },
   "repository": {
