@@ -1,5 +1,5 @@
 const express = require('express')
-const { Detail, Counter } = require('../../db/models')
+const { Detail, Counter } = require('../db/models')
 const _ = require('lodash')
 
 const router = express.Router()
