@@ -8,7 +8,8 @@
     "test": "test",
     "dev": "concurrently \"webpack -w\" \"nodemon\"",
     "start": "node index.js",
-    "seed": "cd db && node seed.js"
+    "seed": "cd db && node seed.js",
+    "docker": "docker run -p 3000:3000 --restart always service"
   },
   "repository": {
     "type": "git",
