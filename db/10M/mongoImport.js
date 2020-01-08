@@ -11,7 +11,7 @@ models.Detail.deleteMany({}, err => {
   else {
     console.log('deleted details')
     execSync(
-      `mongoimport -d sdc -c details --file db/10M.json --numInsertionWorkers ${cpuCount}`,
+      `mongoimport -d sdc -c details --file db/10M/10M.json --numInsertionWorkers ${cpuCount}`,
       { stdio: 'inherit' }
     )
     models.Counter.deleteMany({ id: 'details' }, err => {

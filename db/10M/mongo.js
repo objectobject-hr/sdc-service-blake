@@ -41,7 +41,7 @@ function loadRecords() {
             const cpuCount = os.cpus().length
             console.log('\n')
             execSync(
-              `mongoimport -d sdc -c details --file db/1M.json --numInsertionWorkers ${cpuCount}`,
+              `mongoimport -d sdc -c details --file db/10M/1M.json --numInsertionWorkers ${cpuCount}`,
               { stdio: 'inherit' }
             )
             loaded++
