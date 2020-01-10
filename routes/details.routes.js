@@ -5,7 +5,7 @@ const _ = require('lodash')
 const router = express.Router()
 
 router.get('', ({ query }, res) => {
-  Detail.findOne(query).exec((err, data) => {
+  Detail.findOne(query).lean().exec((err, data) => {
     if (err) console.error(err)
     else res.send(data)
   })
